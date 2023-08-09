@@ -14,37 +14,30 @@ namespace b2b_hitdesign
         {
             try
             {
-                string str = textBox1.Text;
-                string str1 = str.Substring(str.IndexOf("주문번호 : ") + 7, 16);
-                string str2 = str.Substring(str.IndexOf("수령자명\t") + 5, str.IndexOf(" 수령자정보수정") - (str.IndexOf("수령자명\t") + 5));
-                string str3 = str.Substring(str.IndexOf("배송지 주소\t") + 15, str.IndexOf("배송메시지\t") - (str.IndexOf("배송지 주소\t") + 15));
-                string[] str4 = str3.Split(' ');
-                string str5 = null;
-                string str6 = str.Substring(str.IndexOf("주문/CS\r\n") + 7, str.IndexOf("결제 정보\r\n") - (str.IndexOf("주문/CS\r\n") + 7));
-                string[] str9 = str6.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                for (int i = 0; i < str9.Length; i++)
+                string[] array = this.textBox1.Text.Split(new string[1]
                 {
-                    if (str9[i].Length > 6)
+          "\r\n"
+                }, StringSplitOptions.None);
+                int num1 = Array.IndexOf<string>(array, "쇼핑몰주문번호");
+                int num2 = Array.IndexOf<string>(array, "수취인");
+                int num3 = Array.IndexOf<string>(array, "주소");
+                int num4 = Array.IndexOf<string>(array, "[주문상품 정보]");
+                string[] brray = new string[array.Length - 1];
+                for (int i = 0; i < array.Length - 1; i++)
+                {
+                    if (i != num3)
                     {
-                        if (str9[i].Substring(1, 6) == "공급사상품명")
-                        {
-                            str5 += "/" + str9[i - 2] + " " + str9[i + 2];
-
-                        }
-
+                        brray[i] = array[i];
                     }
-
                 }
-
-                textBox6.Text = "▶배송비 선불로 변경 부탁드립니다!" + "\r\n" + str1 + "\r\n[" + str2 + "/" + str4[0] + " " + str4[1] + str5 + "]\r\n > ";
-
+                int num5 = Array.IndexOf<string>(brray, "주소");
+                string[] strArray = brray[num5 + 1].Split(' ');
+                this.textBox6.Text = "▶배송비 선불로 변경 부탁드립니다!\r\n" + array[num1 + 1] + "\r\n[" + array[num2 + 1] + "/" + strArray[1] + " " + strArray[2] + "/" + array[num4 + 2] + " " + array[num4 + 3] + "]\r\n > ";
             }
-            catch (ArgumentOutOfRangeException argumentOutOfRangeException)
+            catch (IndexOutOfRangeException ex)
             {
-                System.Console.WriteLine($"Error: {argumentOutOfRangeException.Message}");
-
+                Console.WriteLine("Error: " + ex.Message);
             }
-
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -96,74 +89,60 @@ namespace b2b_hitdesign
         {
             try
             {
-                string str = textBox4.Text;
-                string str1 = str.Substring(str.IndexOf("주문번호 : ") + 7, 16);
-                string str2 = str.Substring(str.IndexOf("수령자명\t") + 5, str.IndexOf(" 수령자정보수정") - (str.IndexOf("수령자명\t") + 5));
-                string str3 = str.Substring(str.IndexOf("배송지 주소\t") + 15, str.IndexOf("배송메시지\t") - (str.IndexOf("배송지 주소\t") + 15));
-                string[] str4 = str3.Split(' ');
-                string str5 = null;
-                string str6 = str.Substring(str.IndexOf("주문/CS\r\n") + 7, str.IndexOf("결제 정보\r\n") - (str.IndexOf("주문/CS\r\n") + 7));
-                string[] str9 = str6.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                for (int i = 0; i < str9.Length; i++)
+                string[] array = this.textBox1.Text.Split(new string[1]
                 {
-                    if (str9[i].Length > 6)
+          "\r\n"
+                }, StringSplitOptions.None);
+                int num1 = Array.IndexOf<string>(array, "쇼핑몰주문번호");
+                int num2 = Array.IndexOf<string>(array, "수취인");
+                int num3 = Array.IndexOf<string>(array, "주소");
+                int num4 = Array.IndexOf<string>(array, "[주문상품 정보]");
+                string[] brray = new string[array.Length - 1];
+                for (int i = 0; i < array.Length - 1; i++)
+                {
+                    if (i != num3)
                     {
-                        if (str9[i].Substring(1, 6) == "공급사상품명")
-                        {
-                            str5 += "/" + str9[i - 2] + " " + str9[i + 2];
-
-                        }
-
+                        brray[i] = array[i];
                     }
-
                 }
-
-                textBox6.Text = "▶금일 발주건 취소로 삭제 부탁드립니다!" + "\r\n" + str1 + "\r\n[" + str2 + "/" + str4[0] + " " + str4[1] + str5 + "]\r\n > ";
-
+                int num5 = Array.IndexOf<string>(brray, "주소");
+                string[] strArray = brray[num5 + 1].Split(' ');
+                this.textBox6.Text = "▶금일 발주건 취소로 삭제 부탁드립니다!\r\n" + array[num1 + 1] + "\r\n[" + array[num2 + 1] + "/" + strArray[1] + " " + strArray[2] + "/" + array[num4 + 2] + " " + array[num4 + 3] + "]\r\n > ";
             }
-            catch (ArgumentOutOfRangeException argumentOutOfRangeException)
+            catch (IndexOutOfRangeException ex)
             {
-                System.Console.WriteLine($"Error: {argumentOutOfRangeException.Message}");
-
+                Console.WriteLine("Error: " + ex.Message);
             }
-
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                string str = textBox5.Text;
-                string str1 = str.Substring(str.IndexOf("주문번호 : ") + 7, 16);
-                string str2 = str.Substring(str.IndexOf("수령자명\t") + 5, str.IndexOf(" 수령자정보수정") - (str.IndexOf("수령자명\t") + 5));
-                string str3 = str.Substring(str.IndexOf("배송지 주소\t") + 15, str.IndexOf("배송메시지\t") - (str.IndexOf("배송지 주소\t") + 15));
-                string[] str4 = str3.Split(' ');
-                string str5 = null;
-                string str6 = str.Substring(str.IndexOf("주문/CS\r\n") + 7, str.IndexOf("결제 정보\r\n") - (str.IndexOf("주문/CS\r\n") + 7));
-                string[] str9 = str6.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                for (int i = 0; i < str9.Length; i++)
+                string[] array = this.textBox1.Text.Split(new string[1]
                 {
-                    if (str9[i].Length > 6)
+          "\r\n"
+                }, StringSplitOptions.None);
+                int num1 = Array.IndexOf<string>(array, "쇼핑몰주문번호");
+                int num2 = Array.IndexOf<string>(array, "수취인");
+                int num3 = Array.IndexOf<string>(array, "주소");
+                int num4 = Array.IndexOf<string>(array, "[주문상품 정보]");
+                string[] brray = new string[array.Length - 1];
+                for (int i = 0; i < array.Length - 1; i++)
+                {
+                    if (i != num3)
                     {
-                        if (str9[i].Substring(1, 6) == "공급사상품명")
-                        {
-                            str5 += "/" + str9[i - 2] + " " + str9[i + 2];
-
-                        }
-
+                        brray[i] = array[i];
                     }
-
                 }
-
-                textBox6.Text = "▶금일 발주건 메모 추가 부탁드립니다!" + "\r\n" + str1 + "\r\n[" + str2 + "/" + str4[0] + " " + str4[1] + str5 + "]\r\n > ";
-
+                int num5 = Array.IndexOf<string>(brray, "주소");
+                string[] strArray = brray[num5 + 1].Split(' ');
+                this.textBox6.Text = "▶금일 발주건 메모 추가 부탁드립니다!\r\n" + array[num1 + 1] + "\r\n[" + array[num2 + 1] + "/" + strArray[1] + " " + strArray[2] + "/" + array[num4 + 2] + " " + array[num4 + 3] + "]\r\n > ";
             }
-            catch (ArgumentOutOfRangeException argumentOutOfRangeException)
+            catch (IndexOutOfRangeException ex)
             {
-                System.Console.WriteLine($"Error: {argumentOutOfRangeException.Message}");
-
+                Console.WriteLine("Error: " + ex.Message);
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
